@@ -165,9 +165,11 @@ class GO_Recurly
 	{
 		$script_config = apply_filters( 'go_config', array( 'version' => $this->version ), 'go-script-version' );
 
+		$js_min = ( defined( 'GO_DEV' ) && GO_DEV ) ? 'lib' : 'min';
+
 		wp_register_script(
 			'recurly-js',
-			plugins_url( 'js/external/recurly-js/recurly.min.js', __FILE__ ),
+			plugins_url( 'js/' . $js_min . '/external/recurly-js/recurly.min.js', __FILE__ ),
 			array( 'jquery' ),
 			$script_config['version'],
 			TRUE
@@ -175,7 +177,7 @@ class GO_Recurly
 
 		wp_register_script(
 			'go-recurly-config',
-			plugins_url( 'js/go-recurly-config.js', __FILE__ ),
+			plugins_url( 'js/' . $js_min . '/go-recurly-config.js', __FILE__ ),
 			array(
 				'jquery',
 				'recurly-js',
@@ -189,14 +191,14 @@ class GO_Recurly
 		// when necessary.
 		wp_register_script(
 			'go-recurly',
-			plugins_url( 'js/go-recurly.js', __FILE__ ),
+			plugins_url( 'js/' . $js_min . '/go-recurly.js', __FILE__ ),
 			array( 'go-recurly-config' ),
 			$script_config['version'],
 			TRUE
 		);
 
 		wp_register_style( 'go-recurly', plugins_url( 'css/go-recurly.css', __FILE__ ), array(), $script_config['version'] );
-		wp_register_style( 'recurly-css', plugins_url( 'js/external/recurly-js/themes/default/recurly.css', __FILE__ ), array(), $script_config['version'] );
+		wp_register_style( 'recurly-css', plugins_url( 'js/' . $js_min . '/external/recurly-js/themes/default/recurly.css', __FILE__ ), array(), $script_config['version'] );
 
 		// (it would be great to only enqueue these when necessary, but
 		// because we implemented the step 2 form as a return value

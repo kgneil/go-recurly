@@ -33,8 +33,10 @@ class GO_Recurly_Freebies_Admin
 	 */
 	public function register_scripts_and_styles()
 	{
+		$js_min = ( defined( 'GO_DEV' ) && GO_DEV ) ? 'lib' : 'min';
+
 		$script_config = apply_filters( 'go_config', array( 'version' => 1 ), 'go-script-version' );
-		wp_register_script( 'go-recurly-freebies-admin', plugins_url( '/js/go-recurly-freebies-admin.js', __FILE__ ), array( 'jquery', 'jquery-blockui' ), $script_config['version'], TRUE );
+		wp_register_script( 'go-recurly-freebies-admin', plugins_url( '/js/' . $js_min . '/go-recurly-freebies-admin.js', __FILE__ ), array( 'jquery', 'jquery-blockui' ), $script_config['version'], TRUE );
 		wp_enqueue_script( 'go-recurly-freebies-admin' );
 
 		wp_register_style( 'go-recurly-freebies-admin', plugins_url( '/css/go-recurly-freebies-admin.css', __FILE__ ), '', $script_config['version'], 'screen' );
